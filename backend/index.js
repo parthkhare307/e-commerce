@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { error } = require("console");
+const { error, log } = require("console");
 const { type } = require("os");
 
 app.use(express.json());
@@ -200,6 +200,15 @@ app.post('/login',async(req,res)=>{
     else{
         res.json({success:false,error:"Weong Email Id"});
     }
+})
+
+// Creating End Point for Newcollection
+
+app.get('/newcollection',async(req,res)=>{
+    let products= await Product.find({});
+    let newcollection = products.slice(1).slice(-8);
+    console.log("New Collection is Fetch");
+    res.send(newcollection);
 })
 
 app.listen(port,(error)=>{
