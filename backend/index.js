@@ -123,7 +123,6 @@ app.post('/removeproduct',async(req,res)=>{
 
 app.get('/allproducts',async (req,res)=>{
     let products = await Product.find({});
-    console.log("All Products Fetched");
     res.send(products);
 })
 
@@ -198,7 +197,7 @@ app.post('/login',async(req,res)=>{
         }
     }
     else{
-        res.json({success:false,error:"Weong Email Id"});
+        res.json({success:false,error:"Wrong Email Id"});
     }
 })
 
@@ -207,7 +206,6 @@ app.post('/login',async(req,res)=>{
 app.get('/newcollection',async(req,res)=>{
     let products= await Product.find({});
     let newcollection = products.slice(1).slice(-8);
-    console.log("New Collection is Fetch");
     res.send(newcollection);
 })
 
@@ -216,8 +214,11 @@ app.get('/newcollection',async(req,res)=>{
 app.get('/popular_women',async(req,res)=>{
     let products=await Product.find({category:"women"});
     let popular_in_women= products.slice(0,4);
-    console.log("Popular in Women fetch");
     res.send(popular_in_women);
+})
+
+app.post('/addtocart',async(req,res)=>{
+    console.log(req.body);
 })
 
 app.listen(port,(error)=>{
